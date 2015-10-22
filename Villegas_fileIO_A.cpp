@@ -8,23 +8,105 @@
 using namespace std; 
 
 
+int avgWordCount();
+
+void lengthOfWords();
+
+int wordCount();
+
+string makeAllCaps();
+
+string make1upper();
+
+
 int main (){
     
-    ifstream fin; 
     ofstream fout; 
+    ofstream fout2; 
+    ofstream fout3; 
     
+    fout.open("result.txt");
+    if (fout.fail()){
+        cout << "opening the file failed ";
+        exit(1);    
+    }
+    fout << avgWordCount() << endl; 
+    
+    lengthOfWords();
+    fout << wordCount() << endl; 
+    fout.close();
+    
+    fout2.open("capitalize.txt");
+    if (fout2.fail()){
+        cout << "opening the file failed ";
+        exit(1);    
+    }
+    
+    cout << makeAllCaps() << endl;
+    
+    fout2.close();
+    
+    fout3.open("uppercase.txt");
+    if (fout3.fail()){
+        cout << "opening the file failed ";
+        exit(1);    
+    }    
+    fout << make1upper() << endl; 
+    fout3.close();
+    
+    return 0; 
+}
+
+int avgWordCount(){
+
+    ifstream fin; 
     string word; 
     int wordAvg = 0;
     int totalWords= 0;
     int wordLength = 0; 
-    
     
     fin.open("gba.txt");
     if (fin.fail()){
         cout << "opening the file failed ";
         exit(1);    
     }
-    fout.open("result.txt")
+    
+    while(fin >> word ){
+    
+        for(int i = 0; i < word.length(); i ++){
+            if((word[i] >= 'A' || word[i] >= 'a') && (word[i] <= 'Z' || word[i] <= 'z')){
+             
+                wordLength++; 
+             
+            }
+            
+         }
+        totalWords++;
+        
+    }
+   
+    fin.close();
+    return wordAvg;
+}
+
+void lengthOfWords(){
+
+    int wordLength = 0;
+    ifstream fin; 
+    fin.open("gba.txt");
+    if (fin.fail()){
+        cout << "opening the file failed ";
+        exit(1);    
+    }
+    ofstream fout; 
+    fout.open("result.txt");
+     if (fout.fail()){
+        cout << "opening the file failed ";
+        exit(1);    
+    }
+    string word;
+    int totalWords = 0;
+    int len1 = 0, len2 = 0, len3 = 0, len4 =0, len5 = 0,  len6 =0, len7 =0, len8 = 0, len9 = 0, len10 = 0, more11 = 0, symbol =0;  
     while(fin >> word ){
     
         for(int i = 0; i < word.length(); i ++){
@@ -33,13 +115,167 @@ int main (){
                 wordLength++; 
              
              }
+             else{
+                wordLength+=0;
+             }
             
         }
+        
+       
+        switch (wordLength){
+     
+            case 0:
+                symbol++;     
+            case 1 :
+                len1++;
+                break;
+            case 2 :
+                len2++;
+                break;
+            case 3 :
+                len3++;
+                break;
+            case 4 :
+                len4++;
+                break;
+            case 5 :
+                len5++;
+                break;
+            case 6 :
+                len6++;
+                break;            
+            case 7 :
+                len7++;
+                break;
+            case 8 :
+                len8++;
+                break;
+            case 9 :
+                len9++;
+                break;
+            case 10 :
+                len10++;
+                break;
+            default:
+                more11++;
+                break;
+        
+     
+        }
+        totalWords++;
+        cout << totalWords << endl;
+        wordLength = 0;
+    }
+    
+    fout << len1 << " words of Length 1 " << endl << len2 <<  " words of Length 2 " << endl << len3 <<  " words of Length 3 " << endl << len4 << " words of Length 4 " << endl  << len5 << " words of Length 5 " << endl  << len6 << " words of Length 6 " << endl  << len7 << " words of Length 7 " << endl  << len8 << " words of Length 8 " << endl  << len9 << "  words of Length 9 " << endl  << len10 << " words of Length 10 " << endl  << more11 << " words of Length 11 or longer" << endl;
+    
+    fin.close();
+    fout.close();
+}
+
+int wordCount(){
+
+    ifstream fin; 
+    string word; 
+    
+    int totalWords= 0;
+    int wordLength = 0; 
+    
+    fin.open("gba.txt");
+    if (fin.fail()){
+        cout << "opening the file failed ";
+        exit(1);    
+    }
+    
+    while(fin >> word ){
+   
         totalWords++;
         
     }
-    wordAvg = wordLength / totalWords;
-    fout << wordAvg << endl; 
+   
+    fin.close();
+    return totalWords;
+
+
+
+}
+
+
+string makeAllCaps(){
+
+    ifstream fin; 
+    fin.open("gba.txt");
+    if(fin.fail()){
+        cout << "THE FILE FAILED TO OPEN" << endl;
+        
+    }
+    string newWord = "";
+    string word;  
+    char newChar;  
+    string newSentence = ""; 
+    while(fin >> word){
     
-    return 0; 
+        for(int i = 0; i < word.length(); i++){
+            //if((word[i] >= 'A' || word[i] >= 'a') && (word[i] <= 'Z' || word[i] <= 'z')){
+            
+                 newChar = word[i];
+                 newWord += toupper(newChar);
+                 
+                 
+            
+            //}
+               
+            }
+        
+   
+                   
+        newSentence += newWord + " ";
+        newWord = "";
+        }
+        
+        //cout << newWord <<endl;
+        //cout << newSentence << endl;
+
+    
+    return newSentence;
+    fin.close();
+}
+
+
+string make1upper(){
+
+    ifstream fin; 
+    fin.open("gba.txt");
+    if(fin.fail()){
+        cout << "THE FILE FAILED TO OPEN" << endl;
+        
+    }
+    string newWord = "";
+    string word;  
+    string newSentence = ""; 
+    while(fin >> word){
+    
+        for(int i = 0; i < word.length(); i++){
+        
+            if(i == 0){
+            
+                newWord = toupper(word[0]);
+                
+            
+            }
+                    
+            else {
+                newWord += word[i];
+            }        
+        
+        
+        }
+        newSentence += newWord + " ";
+        newWord = "";
+       // cout << newWord <<endl;
+       // cout << newSentence << endl;
+    }
+
+
+    return newSentence;
 }

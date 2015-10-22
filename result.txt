@@ -1,0 +1,12 @@
+14278
+ds of Length 1 
+50 words of Length 2 
+60 words of Length 3 
+58 words of Length 4 
+34 words of Length 5 
+24 words of Length 6 
+15 words of Length 7 
+6 words of Length 8 
+10  words of Length 9 
+4 words of Length 10 
+3 words of Length 11 or longer
